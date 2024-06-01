@@ -1,40 +1,42 @@
 import React from 'react';
-import logo from '../../public/Logo.png'
-import ComunityIcon from '../../public/MyComunityIcon.png'
-import HeartIcon from '../../public/HeartIcon.png'
-import AddUser from '../../public/AddUser.png'
+import { RiUserLine } from "react-icons/ri";
 
 const Navbar = () => {
     return (
-        <nav className="bg-[#11111F] text-white px-6 py-3 flex items-center justify-between">
-            <div className="flex items-center">
-                <div className="flex flex-col">
-                    <div className="text-white-500 font-bold text-lg mb-2 sm:text-xl sm:mb-0">NEIGHBOR</div>
-                    <div className="text-white-500 font-bold text-lg mt-2 sm:text-xl">ALERT</div>
+        <>
+            <nav className="relative flex items-center justify-between sm:h-10 md:justify-center py-10 px-4 bg-[#11111F]">
+                <div className="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0 md:pl-6">
+                    <div className="flex items-center justify-between w-full md:w-auto">
+                        <a href="" aria-label="Home" className="flex items-center">
+                            <img src="https://www.svgrepo.com/show/491978/gas-costs.svg" height="40" width="40" alt="Logo" />
+                            <span className="text-white text-lg font-bold ml-2">Neighbor Alert</span>
+                        </a>
+
+                        <div className="-mr-2 flex items-center md:hidden">
+                            <button type="button" id="main-menu" aria-label="Main menu" aria-haspopup="true" className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                                <svg stroke="currentColor" fill="none" viewBox="0 0 24 24" className="h-6 w-6">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <img src={logo} style={{ width: '120px', height: '60px' }} alt='Logo' className='h-8 ml-2'/>
-            </div>
-            <ul className="flex space-x-4">
-                <li className='flex items-center'>
-                    <a href="/comunityReports" className="hover:text-green-500 mr-1">Reportes de comunidad</a>
-                    <img src={HeartIcon} alt="Heart" style={{ width: '10px', height: '10px' }} className="-m0.5"/>
-                </li>
-                <li><a href="/misreportes" className="hover:text-green-500">Mis Reportes</a></li>
-                <li><a href="/reportar" className="hover:text-green-500">Reportar</a></li>
-                <li><a href="/yoreporter" className="hover:text-green-500">YoReporter</a></li>
-                <li className='flex items-center'>
-                    <img src={ComunityIcon} alt="Login" className="h-6 mr-2 filter invert" />    
-                    <a href="/micomunidad" className="hover:text-green-500">Mi comunidad</a>
-                </li>
-            </ul>
-            
-            <div className="flex items-center">
-                <a href="/register" className="bg-transparent text-green-500 border border-green-500 px-4 py-2 rounded hover:bg-green-600 flex items-center">
-                    <img src={AddUser} alt="AddUser" className="filter invert brightness-0 saturate-100" style={{ width: '35px', height: '35px', marginRight: '10px' }}/>
-                    <span className="ml-auto">Iniciar Sesión</span>
-                </a>
-            </div>
-        </nav>
+                <div className="hidden md:flex md:space-x-10">
+                    <a href="#features"
+                        className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Home</a>
+                    <a href="#pricing"
+                        className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My reports</a>
+                    <a href="/blog"
+                        className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">I reporter</a>
+                    <a href="" target="_blank"
+                        className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My community</a>
+                </div>
+                <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0 md:pr-6">
+                    <button className="btn mx-2 border border-none my-auto bg-[#84BD00] hover:bg-[#92c752] text-white">Sign in</button>
+                    <button className="btn mr2 my-auto">Sign up</button>
+                </div>
+            </nav>
+        </>
     );
 };
 
