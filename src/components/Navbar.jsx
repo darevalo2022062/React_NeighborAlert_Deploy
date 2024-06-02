@@ -1,5 +1,6 @@
 import React from 'react';
 import { RiUserLine } from "react-icons/ri";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     return (
@@ -32,8 +33,8 @@ const Navbar = () => {
                         className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My community</a>
                 </div>
                 <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0 md:pr-6">
-                    <button className="btn mx-2 border border-none my-auto bg-[#84BD00] hover:bg-[#92c752] text-white">Sign in</button>
-                    <button className="btn mr2 my-auto">Sign up</button>
+                    <Link to="/login" className="btn mx-2 border border-none my-auto bg-[#84BD00] hover:bg-[#92c752] text-white">Sign in</Link>
+                    <Link to="/register" className="btn mr2 my-auto">Sign up</Link>
                 </div>
             </nav>
         </>
