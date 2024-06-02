@@ -1,13 +1,19 @@
-import React from 'react'
-import Login from './pages/auth/Login/Login.jsx'
-import Navbar from './components/Navbar.jsx'
+import React, { Suspense } from 'react';
+import { useRoutes } from 'react-router-dom';
+import Loading from './pages/Loading';
+import routes from './routes';
+
+const Routes = () => {
+    const routing = useRoutes(routes);
+    return routing;
+};
 
 const App = () => {
     return (
-        <>
-            <Login />
-        </>
-    )
-}
+        <Suspense fallback={<Loading />}>
+            <Routes />
+        </Suspense>
+    );
+};
 
-export default App
+export default App;

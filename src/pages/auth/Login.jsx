@@ -1,9 +1,17 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { MdMailOutline } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
-import './waves.css';  // Import the CSS for waves
+import { Link } from 'react-router-dom';
+import './waves.css';
 
 const Login = () => {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = data => {
+    console.log(data);
+  };
+
   return (
     <>
       <div className="relative w-full min-h-screen bg-[#11111F] flex flex-col justify-center items-center">
@@ -12,30 +20,44 @@ const Login = () => {
             <h2 className="text-center text-[#84BD00] text-4xl font-extrabold">Login</h2>
             <p className='text-center text-white mt-2 font-semibold'>Enter your email and password to login</p>
           </div>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)} autoComplete='off' noValidate>
             <div className="mb-4">
               <label className="block text-white font-bold mb-2" htmlFor="email">Email address</label>
               <div className='relative'>
-                <input className='shadow appearance-none border rounded-md w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10' id="email" type="email" />
+                <input
+                  className={`shadow appearance-none border rounded-md w-full py-3 px-3 leading-tight focus:outline-none focus:shadow-outline pr-10 ${errors.email ? 'border-2 border-red-500' : 'text-gray-700'
+                    }`}
+                  id="email"
+                  type="email"
+                  {...register('email', { required: 'Email is required', pattern: { value: /^\S+@\S+$/i, message: 'Invalid email address' } })}
+                />
                 <MdMailOutline size={24} color='#11111F' className="absolute right-3 top-1/2 transform -translate-y-1/2" />
               </div>
+              {errors.email && <p className="text-red-500 text-xs font-semibold mt-2">{errors.email.message}</p>}
             </div>
 
             <div className="mb-4">
               <label className="block text-white font-bold mb-2" htmlFor="password">Password</label>
               <div className='relative'>
-                <input className='shadow appearance-none border rounded-md w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10' id="password" type="password" />
+                <input
+                  className={`shadow appearance-none border rounded-md w-full py-3 px-3 leading-tight focus:outline-none focus:shadow-outline pr-10 ${errors.password ? 'border-2 border-red-500' : 'text-gray-700'
+                    }`}
+                  id="password"
+                  type="password"
+                  {...register('password', { required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } })}
+                />
                 <RiLockPasswordFill size={24} color='#11111F' className="absolute right-3 top-1/2 transform -translate-y-1/2" />
               </div>
+              {errors.password && <p className="text-red-500 text-xs font-semibold mt-2">{errors.password.message}</p>}
             </div>
 
             <div className="mt-14">
-              <button className="w-full inline-flex items-center justify-center px-4 py-2 bg-[#84BD00] border border-transparent rounded-md font-semibold capitalize text-white">Sign In</button>
+              <button type="submit" className="btn border-none  text-white w-full  hover:bg-[#92c752] bg-[#84BD00]">Sign In</button>
             </div>
             <div className="mt-6 text-center">
               <p className="text-sm text-white block text-center mt-4">
                 Don't have an account?{' '}
-                <a href="/register" className="text-[#84BD00] hover:underline">Sign up here</a>
+                <Link to="/register" className="text-[#84BD00] hover:underline">Sign up here</Link>
               </p>
             </div>
           </form>
@@ -44,7 +66,7 @@ const Login = () => {
         {/* Waves SVG */}
         <div className="waves">
           <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
-          viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
+            viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
             <defs>
               <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
