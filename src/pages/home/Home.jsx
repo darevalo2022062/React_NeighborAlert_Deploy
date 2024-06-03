@@ -1,7 +1,10 @@
 import React from 'react'
 import Navbar from '../../components/Navbar'
+import useAuth from '../../hooks/useAuth'
 
 const Home = () => {
+    const { isAuthenticated} = useAuth();
+    console.log(isAuthenticated)
     return (
         <> {/* <---- usar estas etiquetas vacias  <>  en cada componente que envuelvan todo el componente */}
             <Navbar />

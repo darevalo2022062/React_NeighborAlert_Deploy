@@ -3,13 +3,17 @@ import { useForm } from 'react-hook-form';
 import { MdMailOutline } from 'react-icons/md';
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 import './waves.css';
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const { login } = useAuth();
 
   const onSubmit = data => {
     console.log(data);
+    const { email, pass } = data;
+    login({ email, pass })
   };
 
   return (
@@ -40,15 +44,14 @@ const Login = () => {
               <label className="block text-white font-bold mb-2" htmlFor="password">Password</label>
               <div className='relative'>
                 <input
-                  className={`shadow appearance-none border rounded-md w-full py-3 px-3 leading-tight focus:outline-none focus:shadow-outline pr-10 ${errors.password ? 'border-2 border-red-500' : 'text-gray-700'
-                    }`}
-                  id="password"
+                  className={`shadow appearance-none border rounded-md w-full py-3 px-3 leading-tight focus:outline-none focus:shadow-outline pr-10 ${errors.pass ? 'border-2 border-red-500' : 'text-gray-700'}`}
+                  id="pass"
                   type="password"
-                  {...register('password', { required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } })}
+                  {...register('pass', { required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 6 characters' } })}
                 />
                 <RiLockPasswordFill size={24} color='#11111F' className="absolute right-3 top-1/2 transform -translate-y-1/2" />
               </div>
-              {errors.password && <p className="text-red-500 text-xs font-semibold mt-2">{errors.password.message}</p>}
+              {errors.pass && <p className="text-red-500 text-xs font-semibold mt-2">{errors.pass.message}</p>}
             </div>
 
             <div className="mt-14">

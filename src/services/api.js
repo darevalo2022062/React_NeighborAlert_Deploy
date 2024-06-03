@@ -16,3 +16,16 @@ export const registerRequest = async (data) => {
     }
 }
 
+export const loginRequest = async (data) => {
+    try {
+        return await apiClient.post('/auth/login', data);
+    } catch (e) {
+        return {
+            error: true,
+            e
+        }
+    }
+}
+
+
+
