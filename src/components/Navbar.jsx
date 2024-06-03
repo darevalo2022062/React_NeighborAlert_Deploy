@@ -6,7 +6,7 @@ import useAuth from '../hooks/useAuth'
 const Navbar = () => {
 
     const { isAuthenticated, logout, user } = useAuth();
-    console.log(user)
+
     return (
         <>
             <nav className="relative flex items-center justify-between sm:h-10 md:justify-center py-10 px-4 bg-[#11111F]">
@@ -27,14 +27,10 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="hidden md:flex md:space-x-10">
-                    <a href="#features"
-                        className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Home</a>
-                    <a href="#pricing"
-                        className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My reports</a>
-                    <a href="/blog"
-                        className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">I reporter</a>
-                    <a href="/"
-                        className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My community</a>
+                    <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Home</a>
+                    <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My reports</a>
+                    <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">I reporter</a>
+                    <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My community</a>
                 </div>
                 <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0 md:pr-6">
                     {isAuthenticated ? (
@@ -47,10 +43,7 @@ const Navbar = () => {
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
                                     <li>
-                                        <a className="justify-between">
-                                            Profile
-
-                                        </a>
+                                        <a className="justify-between">Profile</a>
                                     </li>
                                     <li><a>Settings</a></li>
                                     <li><button onClick={logout}>Logout</button></li>

@@ -50,7 +50,7 @@ const useAuth = () => {
         registerUser,
         login,
         logout,
-        user,
+        user: user?.userDetails,
         isAuthenticated,
         loading,
         error
