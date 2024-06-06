@@ -27,10 +27,23 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="hidden md:flex md:space-x-10">
-                    <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Home</a>
-                    <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My reports</a>
-                    <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">I reporter</a>
-                    <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My community</a>
+                    {
+                        isAuthenticated ? (
+                            <>
+                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Home</a>
+                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My reports</a>
+                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">I reporter</a>
+                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My community</a>
+                            </>
+                        ) : (
+                            <>
+                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Home</a>
+                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">About Us</a>
+                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">How to publish</a>
+                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Confidentiality</a>
+                            </>
+                        )
+                    }
                 </div>
                 <div className="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0 md:pr-6">
                     {isAuthenticated ? (

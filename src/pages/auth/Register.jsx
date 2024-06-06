@@ -9,11 +9,12 @@ import useAuth from '../../hooks/useAuth';
 import { Link } from 'react-router-dom';
 
 const Register = () => {
-    const { register, handleSubmit, formState: { errors }, watch } = useForm();
+    const { register, handleSubmit, formState: { errors }, watch, reset} = useForm();
     const { registerUser } = useAuth();
     const onSubmit = (data) => {
         const { name, lastName, phone, email, pass } = data;
         registerUser({ name, lastName, phone, email, pass });
+        reset()
     };
 
     const password = watch('pass', '');
@@ -142,7 +143,7 @@ const Register = () => {
                         <div className="mt-6 text-center">
                             <p className="text-sm text-white block text-center mt-4">
                                 Already have an account?{' '}
-                                <Link to="/" className="text-[#84BD00] hover:underline">Log in here</Link>
+                                <Link to="/login" className="text-[#84BD00] hover:underline">Log in here</Link>
                             </p>
                         </div>
                     </form>

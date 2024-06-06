@@ -7,13 +7,13 @@ import useAuth from '../../hooks/useAuth';
 import './waves.css';
 
 const Login = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const { login } = useAuth();
 
   const onSubmit = data => {
-    console.log(data);
     const { email, pass } = data;
     login({ email, pass })
+    reset()
   };
 
   return (
