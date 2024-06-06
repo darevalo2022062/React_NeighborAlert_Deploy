@@ -2,6 +2,7 @@ import React from 'react';
 import { RiUserLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth'
+import logo from '../assets/logo.jpg'
 
 const Navbar = () => {
 
@@ -13,7 +14,7 @@ const Navbar = () => {
                 <div className="flex items-center flex-1 md:absolute md:inset-y-0 md:left-0 md:pl-6">
                     <div className="flex items-center justify-between w-full md:w-auto">
                         <a href="" aria-label="Home" className="flex items-center">
-                            <img src="https://www.svgrepo.com/show/491978/gas-costs.svg" height="40" width="40" alt="Logo" />
+                            <img src={logo} className='rounded-full' height="40" width="40" alt="Logo" />
                             <span className="text-white text-lg font-bold ml-2">Neighbor Alert</span>
                         </a>
 
@@ -30,17 +31,17 @@ const Navbar = () => {
                     {
                         isAuthenticated ? (
                             <>
-                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Home</a>
-                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My reports</a>
-                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">I reporter</a>
-                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">My community</a>
+                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">Home</a>
+                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">My reports</a>
+                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">I reporter</a>
+                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">My community</a>
                             </>
                         ) : (
                             <>
-                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Home</a>
-                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">About Us</a>
-                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">How to publish</a>
-                                <a href="" className="font-medium text-white hover:text-gray-500 transition duration-150 ease-in-out">Confidentiality</a>
+                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">Home</a>
+                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">About Us</a>
+                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">How to publish</a>
+                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">Confidentiality</a>
                             </>
                         )
                     }

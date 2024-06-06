@@ -30,7 +30,7 @@ const useAuth = () => {
         dispatch({ type: 'LOGIN_REQUEST' })
         const response = await loginRequest(data)
         if (response.error) {
-            dispatch({ type: 'LOGIN_FAILURE', payload: response.e?.response?.data || 'Ocurrió un error al agregar' });
+            dispatch({ type: 'LOGIN_FAILURE', payload: response.e?.response?.data || 'Ocurrió un error al Iniciar sesion' });
             return toast.error(error || 'Ocurrio un error al iniciar sesion, intenta de nuevo')
         }
         dispatch({ type: 'LOGIN_SUCCESS', payload: response.data });
