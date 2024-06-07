@@ -2,7 +2,7 @@ import React from 'react';
 import { RiUserLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth'
-import logo from '../assets/logo.jpg'
+import logo from '../assets/img/logo.jpg'
 
 const Navbar = () => {
 
@@ -38,8 +38,8 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
-                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">Home</a>
-                                <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">About Us</a>
+                                <Link to="/" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">Home</Link>
+                                <Link to="/about" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">About Us</Link>
                                 <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">How to publish</a>
                                 <a href="" className="font-bold text-lg text-white hover:text-[#84BD00] transition duration-150 ease-in-out">Confidentiality</a>
                             </>

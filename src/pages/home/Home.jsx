@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import useAuth from '../../hooks/useAuth';
-import hero from '../../assets/hero.svg';
+import hero from '../../assets/svg/homehero.svg';
 import { TbReport } from "react-icons/tb";
 import { RxUpdate } from "react-icons/rx";
 import { BsIncognito } from "react-icons/bs";
