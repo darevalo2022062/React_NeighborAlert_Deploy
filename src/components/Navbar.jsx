@@ -7,6 +7,7 @@ import logo from '../assets/img/logo.jpg'
 const Navbar = () => {
 
     const { isAuthenticated, login, user, logout } = useAuth();
+    console.log(user)
     return (
         <>
             <nav className="relative flex items-center justify-between sm:h-10 md:justify-center py-10 px-4 bg-[#11111F]">
