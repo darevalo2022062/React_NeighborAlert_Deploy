@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { useRoutes } from 'react-router-dom';
-import Loading from './pages/Loading';
+import Loading from './components/common/Loading';
 import { Toaster } from 'react-hot-toast';
 import routes from './routes';
 
@@ -13,7 +13,7 @@ const App = () => {
     return (
         <Suspense fallback={<Loading />}>
             <Routes />
-            <Toaster position="top-center" reverseOrder={false} />
+            <Toaster position="bottom-center" reverseOrder={false} />
         </Suspense>
     );
 };
