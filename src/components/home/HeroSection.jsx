@@ -23,7 +23,7 @@ export const HeroSection = () => {
                             NeighborAlert is a digital tool for community members to report and resolve local issues collaboratively. It promotes safety, cleanliness, and prosperity by empowering users to post problems, receive updates, and maintain privacy.
                         </p>
                         <div className='flex justify-center'>
-                            <Link to='/register' className="btn btn-lg mx-2 border border-none my-auto bg-[#84BD00] hover:bg-[#92c752] text-white">
+                            <Link to='/register' className="btn rounded-full btn-lg mx-2 border border-none my-auto bg-[#84BD00] hover:bg-[#92c752] text-white">
                                 Join Us Now
                             </Link>
                         </div>

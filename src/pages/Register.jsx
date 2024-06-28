@@ -13,10 +13,10 @@ const Register = () => {
     pass.current = watch('pass', '');
 
     const onSubmit = async (data) => {
-        console.log(data)
-        await authRegister(data);
-
+        await authRegister(data); // Send the data directly
     };
+
+
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -35,27 +35,27 @@ const Register = () => {
             <div className='bg-[#11111F]'>
                 <div className="min-h-screen content-center max-w-4xl mx-auto p-6">
                     <div className="text-center mb-8">
-                        <h2 className="text-center text-[#84BD00] text-4xl font-extrabold">Sign-In</h2>
+                        <h2 className="text-center text-[#84BD00] text-4xl font-extrabold">Sign-In</h2>a
                         <p className='text-center text-white mt-2 font-semibold'>Enter your information</p>
                     </div>
-                    <form autoComplete="off" noValidate onSubmit={handleSubmit(onSubmit)}>
+                    <form encType="multipart/form-data" autoComplete="off" noValidate onSubmit={handleSubmit(onSubmit)}>
                         <div className="flex flex-col items-center justify-center">
-                            <label htmlFor="photo" className="cursor-pointer">
+                            <label htmlFor="img" className="cursor-pointer">
                                 <div className="w-32 h-32 rounded-full overflow-hidden">
                                     <img src={selectedPhoto} alt="Avatar" className="w-full h-full object-cover" />
                                 </div>
                             </label>
                             <p className="text-sm font-semibold text-white mb-3">Select an image</p>
                             <input
-                                id="photo"
+                                id="img"
                                 type="file"
                                 className="hidden"
-                                {...formRegister("photo", {
+                                {...formRegister("img", {
                                     required: "Photo is required",
                                     onChange: handleFileChange
                                 })}
                             />
-                            {errors.photo && <span className="text-red-500">{errors.photo.message}</span>}
+                            {errors.img && <span className="text-red-500">{errors.img.message}</span>}
                         </div>
 
                         <div className="grid sm:grid-cols-2 gap-8">
@@ -64,6 +64,7 @@ const Register = () => {
                                     type={'text'}
                                     label={"Name"}
                                     name={'name'}
+                                    color={'text-white'}
                                     placeholder={'Enter your name'}
                                     register={formRegister}
                                     rules={{ required: 'Name is required' }}
@@ -75,6 +76,7 @@ const Register = () => {
                                     type={'text'}
                                     label={"Last name"}
                                     name={'lastName'}
+                                    color={'text-white'}
                                     placeholder={'Enter your last name'}
                                     register={formRegister}
                                     rules={{ required: 'Last name is required' }}
@@ -86,6 +88,7 @@ const Register = () => {
                                     type={'tel'}
                                     label={"Phone"}
                                     name={'phone'}
+                                    color={'text-white'}
                                     placeholder={'Enter your phone number'}
                                     register={formRegister}
                                     rules={{ required: 'Phone number is required' }}
@@ -97,6 +100,7 @@ const Register = () => {
                                     type={'email'}
                                     label={"Email Address"}
                                     name={'email'}
+                                    color={'text-white'}
                                     placeholder={'Enter your email address'}
                                     register={formRegister}
                                     rules={{
@@ -113,6 +117,7 @@ const Register = () => {
                                     type={'password'}
                                     label={"Password"}
                                     name={'pass'}
+                                    color={'text-white'}
                                     placeholder={'Enter your password'}
                                     register={formRegister}
                                     rules={{
@@ -129,6 +134,7 @@ const Register = () => {
                                     type={'password'}
                                     label={"Confirm Password"}
                                     name={'confirmPassword'}
+                                    color={'text-white'}
                                     placeholder={'Enter confirm password'}
                                     register={formRegister}
                                     rules={{
@@ -141,8 +147,8 @@ const Register = () => {
                         </div>
 
                         <div className="!mt-12 flex justify-center">
-                            <button type="submit" className="w-full md:w-48 lg:w-52 py-3.5 px-7 text-sm font-bold tracking-wider rounded-md text-white bg-[#84BD00] hover:bg-[#92c752] focus:outline-none">
-                                {loading ? 'Registering...' : 'Sign up'}
+                        <button type="submit" className="w-full md:w-96 rounded-full font-bold py-4 px-4 text-xl tracking-wide text-white bg-[#84BD00] hover:bg-[#92c752] focus:outline-none">
+                        {loading ? 'Registering...' : 'Sign up'}
                             </button>
                         </div>
                         <div className="mt-6 text-center">

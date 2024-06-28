@@ -11,7 +11,6 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     await login(data);
-    reset();
   };
 
   return (
@@ -24,12 +23,13 @@ const Login = () => {
             <div className="p-8">
               <div className=" w-full h-full flex flex-col justify-center items-center">
                 <h2 className="text-center text-[#84BD00] text-4xl font-extrabold">Login</h2>
-                <p className='text-center text-white mt-2 font-semibold'>Enter your email and password to login</p>
+                <p className='text-center text-white mt-2 font-normal'>Enter your email and password to login</p>
               </div>
               <form className="mt-8 space-y-4" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-2">
                   <Input
                     type={'email'}
+                    color={'text-white'}
                     label={"Email Address"}
                     name={'email'}
                     placeholder={'Enter your email address'}
@@ -48,6 +48,7 @@ const Login = () => {
                   <Input
                     type={'password'}
                     label={"Password"}
+                    color={'text-white'}
                     name={'pass'}
                     placeholder={'Enter your password'}
                     register={register}
@@ -71,7 +72,7 @@ const Login = () => {
                 </div>
 
                 <div className="!mt-8">
-                  <button type="submit" className="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-[#84BD00] hover:bg-[#92c752] focus:outline-none">
+                  <button type="submit" className="w-full rounded-full font-bold py-4 px-4 text-xl tracking-wide text-white bg-[#84BD00] hover:bg-[#92c752] focus:outline-none">
                     {loading ? 'Logging in...' : 'Login'}
                   </button>
                 </div>

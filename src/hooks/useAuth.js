@@ -13,23 +13,39 @@ const useAuth = () => {
     const [register, { isLoading: isLoadingRegister }] = useRegisterMutation();
     const { isAuthenticated, user } = useSelector((state) => state.user);
 
+    const prepareFormData = (data) => {
+        const formData = new FormData();
+        Object.keys(data).forEach(key => {
+            if (key === 'img' && data[key][0]) {
+                formData.append(key, data[key][0]); // Append file
+            } else {
+                formData.append(key, data[key]);
+            }
+        });
+        return formData;
+    };
+
     const handlerLogin = async (data) => {
         try {
             const loginRequest = await login(data).unwrap();
             dispatch(setCredentials(loginRequest));
-            navigate('/');
+            navigate('/reports');
+            toast.success('Successfully logged in');
         } catch (err) {
-            toast.error(err.data || 'Ocurrió un error al iniciar sesión, intenta de nuevo');
+            const errorMessage = err?.data?.error ? err.data.errors[0]?.msg : err?.data || 'Ocurrió un error al registrarse, intenta de nuevo';
+            toast.error(errorMessage);
         }
     };
 
     const handlerRegister = async (data) => {
         try {
-            await register(data).unwrap();
+            const formData = prepareFormData(data);
+            await register(formData).unwrap();
             navigate('/login');
+            toast.success('You have successfully registered');
         } catch (err) {
-            console.log(err)
-            toast.error(err?.data?.errors[0]?.msg || 'Ocurrió un error al iniciar sesión, intenta de nuevo');
+            const errorMessage = err?.data?.error ? err.data.errors[0]?.msg : err?.data || 'Ocurrió un error al registrarse, intenta de nuevo';
+            toast.error(errorMessage);
         }
     };
 
