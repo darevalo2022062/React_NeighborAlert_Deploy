@@ -1,14 +1,29 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import { FormReport } from '../components/Reports/FormReport'
+import useAuth from '../hooks/useAuth'
+import Footer from '../components/common/Footer';
+import EnterCommunity from '../components/report/EnterCommunity';
+import { FormReport } from '../components/report/FormReport';
 
 const Reports = () => {
+
+    const { user } = useAuth();
+
     return (
         <>
             <Navbar />
-            <div >
-                <FormReport />
-            </div>
+
+            {user.idCommunity == null ? (
+                <>
+                    <EnterCommunity />
+                </>
+            ) : (
+                <>
+                    <FormReport />
+                </>
+            )}
+            <Footer />
+
         </>
     )
 }

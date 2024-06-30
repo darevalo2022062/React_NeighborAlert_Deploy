@@ -10,6 +10,7 @@ const Community = () => {
             <Navbar />
             <div>Nombre: {user.name}</div>
             <div>Nombre: {user.lastName}</div>
+            <div>Nombre: {user.email}</div>
         </>
     )
 }

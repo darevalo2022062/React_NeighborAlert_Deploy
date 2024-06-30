@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLoginMutation, useRegisterMutation } from '../services/userApi';
 import { setCredentials, clearCredentials } from '../features/userSlice';
@@ -28,11 +27,13 @@ const useAuth = () => {
     const handlerLogin = async (data) => {
         try {
             const loginRequest = await login(data).unwrap();
+            console.log(loginRequest)
             dispatch(setCredentials(loginRequest));
             navigate('/reports');
             toast.success('Successfully logged in');
         } catch (err) {
-            const errorMessage = err?.data?.error ? err.data.errors[0]?.msg : err?.data || 'Ocurrió un error al registrarse, intenta de nuevo';
+            console.log(err)
+            const errorMessage = err?.data?.errors ? err.data.errors[0]?.msg : err?.data?.error || 'Ocurrió un error al registrarse, intenta de nuevo';
             toast.error(errorMessage);
         }
     };
@@ -44,7 +45,8 @@ const useAuth = () => {
             navigate('/login');
             toast.success('You have successfully registered');
         } catch (err) {
-            const errorMessage = err?.data?.error ? err.data.errors[0]?.msg : err?.data || 'Ocurrió un error al registrarse, intenta de nuevo';
+            console.log(err)
+            const errorMessage = err?.data?.errors ? err.data.errors[0]?.msg : err?.data?.error || 'Ocurrió un error al registrarse, intenta de nuevo';
             toast.error(errorMessage);
         }
     };

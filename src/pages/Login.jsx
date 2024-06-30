@@ -5,8 +5,8 @@ import Input from '../components/common/Input';
 import useAuth from '../hooks/useAuth';
 
 const Login = () => {
-  const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
-  const { login, loading, isAuthenticated } = useAuth();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { login, loading } = useAuth();
 
 
   const onSubmit = async (data) => {

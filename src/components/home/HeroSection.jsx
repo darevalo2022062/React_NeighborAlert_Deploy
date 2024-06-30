@@ -4,7 +4,7 @@ import hero from '../../assets/svg/homehero.svg';
 
 export const HeroSection = () => {
     return (
-        <div className="bg-[#11111F] min-h-[calc(100vh-80px)] flex items-start md:items-center py-10 md:py-0">
+        <div className="bg-[#11111F] min-h-[calc(100vh-96px)] flex items-start md:items-center py-10 md:py-0">
             <div className="container mx-auto px-6 md:px-12">
                 <div className="flex flex-col-reverse md:flex-row items-center gap-10">
                     <div className="w-full md:w-1/2 lg:w-1/2 flex justify-center">

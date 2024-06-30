@@ -7,6 +7,8 @@ import useAuth from '../hooks/useAuth';
 
 export const Navbar = () => {
     const { isAuthenticated, user, logout } = useAuth();
+    console.log("🚀 ~ Navbar ~ user:", user)
+
     const [isOpen, setIsOpen] = useState(false);
     const sidebarRef = useRef(null);
 
@@ -68,7 +70,7 @@ export const Navbar = () => {
                     <div className="hidden md:block">
                         {isAuthenticated ? (
                             <div className="dropdown dropdown-end">
-                                <div tabIndex={0} role="button" className="btn btn-ghost  avatar btn-lg">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar btn-lg">
                                     <div className="w-14 rounded-full">
                                         <img
                                             alt="Tailwind CSS Navbar component"
@@ -76,17 +78,15 @@ export const Navbar = () => {
                                     </div>
                                 </div>
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                    <li>
-                                        <a className="justify-between">Profile</a>
-                                    </li>
-                                    <li><a>Settings</a></li>
+                                    <li>  <Link to='/profile' className="justify-between">Profile</Link></li>
+                                    <li>  <Link to='/settings' className="justify-between">Settings</Link></li>
                                     <li><button onClick={logout}>Logout</button></li>
                                 </ul>
                             </div>
                         ) : (
                             <>
-                                <Link to="/login" className="btn rounded-full px-7 mx-2 border border-none my-auto bg-[#84BD00] hover:bg-[#92c752] text-white">Sign in</Link>
-                                <Link to="/register" className="btn rounded-full px-6 border border-none">Sign up</Link>
+                                <Link to="/login" className="rounded-full font-semibold px-6 py-4 mx-2 border border-none my-auto bg-[#84BD00] hover:bg-[#92c752] text-white">Sign in</Link>
+                                <Link to="/register" className="bg-gray-50  font-semibold rounded-full px-5 py-4 border border-none">Sign up</Link>
                             </>
                         )}
                     </div>
@@ -109,12 +109,10 @@ export const Navbar = () => {
                                 {isAuthenticated ? (
                                     <>
                                         <div className="flex flex-col items-center">
-                                            <div className="w-16 rounded-full">
-                                                <img alt="User avatar" src={user.img} className='rounded-full' />
-                                            </div>
+                                            <img src={user.img} className="object-cover w-20 h-20 rounded-full" />
                                             <span className="text-white mt-2">{`${user.name} ${user.lastName}`}</span>
                                         </div>
-                                        <Link to="/reports" onClick={toggleSidebar} className="block text-white hover:bg-gray-700 px-3 py-2 rounded-md">Profile</Link>
+                                        <Link to="/profile" onClick={toggleSidebar} className="block text-white hover:bg-gray-700 px-3 py-2 rounded-md">Profile</Link>
                                         <Link to="/reports" onClick={toggleSidebar} className="block text-white hover:bg-gray-700 px-3 py-2 rounded-md">Settings</Link>
                                         <div className="h-px bg-gray-300 border-0"></div>
                                         <Link to="/reports" onClick={toggleSidebar} className="block text-white hover:bg-gray-700 px-3 py-2 rounded-md">Reports</Link>

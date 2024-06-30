@@ -19,7 +19,14 @@ export const userApi = createApi({
                 body: data,
             }),
         }),
+        enterCommunity: builder.mutation({
+            query: (data) => ({
+                url: 'user/community',
+                method: 'PUT',
+                body: data,
+            }),
+        })
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation } = userApi;
+export const { useLoginMutation, useRegisterMutation, useEnterCommunityMutation } = userApi;
