@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userApi } from './services/userApi';
 import userReducer from './features/userSlice';
+import { postApi } from './services/postApi';
+
 import {
     persistStore,
     persistReducer,
@@ -23,6 +25,7 @@ const persistedReducer = persistReducer(persistConfig, userReducer);
 
 export const store = configureStore({
     reducer: {
+        [postApi.reducerPath]: postApi.reducer,
         [userApi.reducerPath]: userApi.reducer,
         user: persistedReducer,
     },
@@ -38,7 +41,7 @@ export const store = configureStore({
                     REGISTER,
                 ],
             },
-        }).concat(userApi.middleware),
-});
+        }).concat(userApi.middleware, postApi.middleware),
+    });
 
 export const persistor = persistStore(store);

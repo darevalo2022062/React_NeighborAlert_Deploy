@@ -10,6 +10,7 @@ const useAuth = () => {
 
     const [login, { isLoading: isLoadingLogin }] = useLoginMutation();
     const [register, { isLoading: isLoadingRegister }] = useRegisterMutation();
+
     const { isAuthenticated, user } = useSelector((state) => state.user);
 
     const prepareFormData = (data) => {
@@ -33,7 +34,10 @@ const useAuth = () => {
             toast.success('Successfully logged in');
         } catch (err) {
             console.log(err)
-            const errorMessage = err?.data?.errors ? err.data.errors[0]?.msg : err?.data?.error || 'Ocurrió un error al registrarse, intenta de nuevo';
+            const errorMessage = err?.data?.errors?.[0]?.msg
+                || err?.data
+                || err?.data.error
+                || 'An error occurred, please try again';
             toast.error(errorMessage);
         }
     };
@@ -45,8 +49,10 @@ const useAuth = () => {
             navigate('/login');
             toast.success('You have successfully registered');
         } catch (err) {
-            console.log(err)
-            const errorMessage = err?.data?.errors ? err.data.errors[0]?.msg : err?.data?.error || 'Ocurrió un error al registrarse, intenta de nuevo';
+            const errorMessage = err?.data?.errors?.[0]?.msg
+                || err?.data
+                || err?.data.error
+                || 'An error occurred, please try again';
             toast.error(errorMessage);
         }
     };

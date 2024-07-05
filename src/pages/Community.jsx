@@ -1,6 +1,8 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import useAuth from '../hooks/useAuth'
+import { Section } from '../components/community/Section'
+
 
 const Community = () => {
     const { user } = useAuth()
@@ -8,9 +10,8 @@ const Community = () => {
     return (
         <>
             <Navbar />
-            <div>Nombre: {user.name}</div>
-            <div>Nombre: {user.lastName}</div>
-            <div>Nombre: {user.email}</div>
+            <Section/>
+         
         </>
     )
 }

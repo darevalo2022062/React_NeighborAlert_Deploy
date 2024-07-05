@@ -7,7 +7,7 @@ export const ComboBox = ({ label, name, placeholder, options, register, rules, e
       <div className="relative">
         <select
           id={name}
-          className="bg-gray-100 w-full text-gray-800 text-lg px-4 py-3.5 rounded-md transition-all focus:outline-none focus:ring-[3px] focus:ring-[#84BD00]"
+          className="bg-gray-200 w-full text-gray-800 text-lg px-4 py-3.5 rounded-md transition-all focus:outline-none focus:ring-[3px] focus:ring-[#84BD00]"
           {...register(name, rules)}
         >
           <option value="">{placeholder}</option>

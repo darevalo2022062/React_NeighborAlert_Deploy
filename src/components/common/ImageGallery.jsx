@@ -15,11 +15,11 @@ const ImageGallery = ({ images }) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full mb-4">
       <Slider {...settings}>
         {images.map((image, index) => (
           <div key={index} className="px-2">
-            <img src={image} alt={`Gallery image ${index + 1}`} className="w-full h-80 object-cover" />
+            <img src={image} alt={`Gallery image ${index + 1}`} className="w-full h-96 object-cover rounded-2xl" />
           </div>
         ))}
       </Slider>

@@ -32,18 +32,17 @@ const EnterCommunity = () => {
                 <div className="mx-auto max-w-md text-center">
                     <FiAlertTriangle className="mx-auto h-14 w-14 stroke-[px]" />
                     <h1 className="mt-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                        No estás asociado a ninguna comunidad
+                        You are not associated with any community
                     </h1>
                     <p className="mt-4 text-muted-foreground">
-                        Lo sentimos, pero parece que no estás asociado a ninguna comunidad. Por favor, contacta a un administrador
-                        para obtener acceso.
+                        We're sorry, but it appears that you are not associated with a community. Please contact an administrator to gain access.
                     </p>
                     <div className="mt-6">
                         <button
                             onClick={openModal}
                             className="inline-flex items-center bg-[#84BD00] text-white px-4 py-4 rounded-full text-sm font-medium shadow-sm transition-colors focus:outline-none"
                         >
-                            Ingresa a una comunidad
+                            Join a community
                         </button>
                     </div>
                 </div>

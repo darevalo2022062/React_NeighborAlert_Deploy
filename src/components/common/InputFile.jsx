@@ -34,7 +34,7 @@ export const InputFile = () => {
     ));
 
     return (
-        <div className='w-full mb-2'>
+        <div className='w-full'>
             <div {...getRootProps({ className: 'dropzone' })} className="mx-auto cursor-pointer flex flex-col items-center rounded-xl border-2 border-[#84BD00] border-dashed bg-gray-100 p-6 text-center">
                 <input {...getInputProps()} id="dropzone-file" className="hidden" />
 

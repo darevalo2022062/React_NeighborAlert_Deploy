@@ -16,7 +16,7 @@ const Input = ({ label, name, type, placeholder, rules, register, error, color }
                 <input
                     id={name}
                     type={showPassword ? 'text' : type}
-                    className="bg-gray-100 w-full text-gray-800 text-lg px-4 py-3.5 rounded-md transition-all focus:outline-none focus:ring-[3px] focus:ring-[#84BD00]"
+                    className="bg-gray-200 w-full text-gray-800 text-lg px-4 py-3.5 rounded-md transition-all focus:outline-none focus:ring-[3px] focus:ring-[#84BD00]"
                     placeholder={placeholder}
                     {...register(name, rules)}
                 />

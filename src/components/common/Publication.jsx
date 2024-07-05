@@ -1,45 +1,93 @@
-import React from 'react'
-import ImageGallery from './ImageGallery'
+import React from 'react';
+import { GoComment } from "react-icons/go";
+import { CiShare2 } from "react-icons/ci";
+import ImageGallery from './ImageGallery';
+import { format, parseISO } from 'date-fns';
 
-export const Publication = () => {
+export const Publication = ({ post }) => {
+
+    const { _id, idUser, idCommunity, title, content, category, anonymous, createdAt } = post;
+
+    const formatDate = (isoString) => {
+        const date = parseISO(isoString);
+        return format(date, "dd MMMM 'at' hh.mm a");
+    };
+
+    console.log(post)
     const images = [
         'https://placehold.co/600x400',
+        'https://img.freepik.com/vector-gratis/minimalista-marco-blanco_23-2147504491.jpg?size=338&ext=jpg&ga=GA1.1.1413502914.1719964800&semt=ais_user',
         'https://placehold.co/600x400',
-        'https://placehold.co/600x400',
-    ]
+    ];
+
+    const formattedDate = formatDate(createdAt);
+
     return (
-        <div class="p-4 max-w-md">
-            <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+        <div className="border max-w-screen-sm bg-white mt-10 rounded-2xl p-5 w-full">
+            <div className="flex items-center justify-between">
+                <div className="gap-3.5 flex items-center">
+                    {anonymous ? (
+                        <>
+                            <img
+                                src="https://i.ibb.co/Wg3WSP6/icon.jpg"
+                                className="object-cover bg-yellow-500 border border-gray-500 rounded-full w-14 h-14"
+                                alt="Profile"
+                            />
+                            <div className="flex flex-col">
+                                <b className="mb-2 capitalize">User Anonymous</b>
+                                <time dateTime={createdAt} className="text-gray-400 text-xs">{formattedDate}</time>
+
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <img
+                                src={idUser.img}
+                                className="object-cover bg-yellow-500 rounded-full w-14 h-14"
+                                alt="Profile"
+                            />
+                            <div className="flex flex-col">
+                                <b className="mb-2 capitalize">{`${idUser.name} ${idUser.lastName}`}</b>
+                                <time dateTime={createdAt} className="text-gray-400 text-xs">{formattedDate}</time>
+                            </div>
+                        </>
+                    )}
+                </div>
+                <div className="bg-gray-100 rounded-full h-3.5 flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="34px" fill="#92929D">
+                        <path d="M0 0h24v24H0V0z" fill="none" />
+                        <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
+                    </svg>
+                </div>
+            </div>
+            <div className="whitespace-pre-wrap mt-7">
+                <h1 className="text-2xl font-bold mb-4">{title}</h1>
+                {content}
+            </div>
+            <div className="mt-2 text-blue-500">{category}</div>
+
+            <div className="mt-5 flex gap-2 justify-center border-b pb-4 flex-wrap">
                 <ImageGallery images={images} />
-                <div class="p-6">
-                    <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
-                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">The Catalyzer</h1>
-                    <p class="leading-relaxed mb-3">
-                        Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing
-                        tousled waistcoat.
-                    </p>
-                    <div class="flex items-center flex-wrap">
-                        <a class="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">
-                            Learn More
-                            <svg class="w-4 h-4 ml-2" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M5 12h14"></path>
-                                <path d="M12 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                        <span class="text-gray-400 mr-3 inline-flex items-center lg:ml-auto md:ml-0 ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
-                            <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
-                            1.2K
-                        </span>
-                        <span class="text-gray-400 inline-flex items-center leading-none text-sm">
-                            <svg class="w-4 h-4 mr-1" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-                                <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"></path>
-                            </svg>6
-                        </span>
-                    </div>
+            </div>
+            <div className="h-16 border-b flex items-center justify-around">
+                <div className="flex items-center gap-3">
+                    <GoComment size='24' color='gray' />
+                    <div className="text-sm">10 Comments</div>
+                </div>
+                <div className="flex items-center gap-3">
+                    <CiShare2 size='24' color='gray' />
+
+                    <div className="text-sm">Share</div>
+                </div>
+            </div>
+            <div className="flex items-center justify-between mt-4">
+                <img
+                    src="https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+                    className="bg-yellow-500 rounded-full w-10 h-10 object-cover border"
+                    alt="User profile"
+                />
+                <div className="flex items-center justify-between bg-gray-50 h-11 w-11/12 border rounded-2xl overflow-hidden px-4">
+                    <input type="text" className="h-full w-full bg-gray-50 outline-none" placeholder="Write your comment..." name="comment" />
                 </div>
             </div>
         </div>
