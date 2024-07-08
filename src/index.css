@@ -82,3 +82,7 @@ body {
     height: 8vh;
   }
 }
+
+.swiper-button-next::after, .swiper-button-prev::after{
+  color: #84BD00;
+}

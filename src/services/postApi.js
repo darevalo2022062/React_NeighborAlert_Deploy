@@ -21,8 +21,14 @@ export const postApi = createApi({
             providesTags: ['Posts'],
             transformResponse: (response) => response.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
         }),
-
+        deletePost: builder.mutation({
+            query: (taskId) => ({
+                url: `/post/${taskId}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ['Posts'],
+        })
     }),
 });
 
-export const { useCreatePostMutation, useGetPostsByCommunityQuery } = postApi;
+export const { useCreatePostMutation, useGetPostsByCommunityQuery, useDeletePostMutation} = postApi;

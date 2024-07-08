@@ -7,7 +7,6 @@ import useAuth from '../hooks/useAuth';
 
 export const Navbar = () => {
     const { isAuthenticated, user, logout } = useAuth();
-    console.log("🚀 ~ Navbar ~ user:", user)
 
     const [isOpen, setIsOpen] = useState(false);
     const sidebarRef = useRef(null);
@@ -54,8 +53,7 @@ export const Navbar = () => {
                         {isAuthenticated ? (
                             <>
                                 <Link to="/reports" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">Reports</Link>
-                                <Link to="/my-reports" className="text-white  hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">My reports</Link>
-                                <Link to="/i-reporter" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">I reporter</Link>
+                                <Link to="/i-reporter" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">Communities</Link>
                                 <Link to="/community" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">My community</Link>
                             </>
                         ) : (

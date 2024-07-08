@@ -11,36 +11,31 @@ import { useEffect } from 'react'
 const Reports = () => {
     const { user } = useAuth();
 
-
-    const { posts, isLoadingPosts, error } = usePost();
-
-
-
-
-
-    console.log('posts:', posts);
-    if (isLoadingPosts) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
+    const { posts, isLoadingPosts, error, deletePost } = usePost();
 
     return (
         <>
             <Navbar />
             {user.idCommunity == null ? (
                 <EnterCommunity />
+            ) : (isLoadingPosts ? (
+                <div className='min-h-[calc(100vh-96px)] flex justify-center items-center'>
+                    <span className="loading loading-dots loading-lg"></span>
+                </div>
+            ) : error ? (
+                <div>Error: {error.message}</div>
             ) : (
-                <div className='flex justify-center'>
-                    <div className='max-w-5xl w-full p-8'>
-                        <div className='flex justify-end'>
-                            <FormReport />
-                        </div>
+                <div className='min-h-[calc(100vh-96px)] flex justify-center'>
+                    <div className='max-w-5xl w-full'>
+                        <FormReport  />
                         <div className='flex flex-col items-center'>
                             {posts.map(post => (
-                                <Publication key={post._id} post={post} />
+                                <Publication key={post._id} post={post} deletePost={deletePost} user={user} />
                             ))}
                         </div>
                     </div>
                 </div>
-            )}
+            ))}
             <Footer />
         </>
     );

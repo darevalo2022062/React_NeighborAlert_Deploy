@@ -1,19 +1,20 @@
-import React from 'react';
-import { GoComment } from "react-icons/go";
-import { CiShare2 } from "react-icons/ci";
-import ImageGallery from './ImageGallery';
 import { format, parseISO } from 'date-fns';
+import React from 'react';
+import { CiShare2 } from "react-icons/ci";
+import { GoComment } from "react-icons/go";
+import { SlOptions } from "react-icons/sl";
+import ImageGallery from './ImageGallery';
 
-export const Publication = ({ post }) => {
+export const Publication = ({ post, deletePost, user }) => {
 
-    const { _id, idUser, idCommunity, title, content, category, anonymous, createdAt } = post;
+    const { _id, idUser, title, content, category, anonymous, createdAt } = post;
 
     const formatDate = (isoString) => {
         const date = parseISO(isoString);
         return format(date, "dd MMMM 'at' hh.mm a");
     };
 
-    console.log(post)
+
     const images = [
         'https://placehold.co/600x400',
         'https://img.freepik.com/vector-gratis/minimalista-marco-blanco_23-2147504491.jpg?size=338&ext=jpg&ga=GA1.1.1413502914.1719964800&semt=ais_user',
@@ -23,7 +24,7 @@ export const Publication = ({ post }) => {
     const formattedDate = formatDate(createdAt);
 
     return (
-        <div className="border max-w-screen-sm bg-white mt-10 rounded-2xl p-5 w-full">
+        <div className="border max-w-screen-sm bg-white my-6 shadow-2xl rounded-2xl p-5 w-full">
             <div className="flex items-center justify-between">
                 <div className="gap-3.5 flex items-center">
                     {anonymous ? (
@@ -43,7 +44,7 @@ export const Publication = ({ post }) => {
                         <>
                             <img
                                 src={idUser.img}
-                                className="object-cover bg-yellow-500 rounded-full w-14 h-14"
+                                className="object-cover bg-transparent rounded-full w-14 h-14"
                                 alt="Profile"
                             />
                             <div className="flex flex-col">
@@ -53,11 +54,18 @@ export const Publication = ({ post }) => {
                         </>
                     )}
                 </div>
-                <div className="bg-gray-100 rounded-full h-3.5 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="34px" fill="#92929D">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-                    </svg>
+                <div className="dropdown dropdown-bottom dropdown-end ">
+                    <div tabIndex={0} role="button" className="btn btn-circle btn-sm m-1 btn-ghost">
+                        <SlOptions />
+
+                    </div>
+                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                        {user && user.id === idUser?._id && (
+                            <li><button onClick={() => deletePost(_id)}>Delete post</button></li>
+                        )}
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                    </ul>
                 </div>
             </div>
             <div className="whitespace-pre-wrap mt-7">

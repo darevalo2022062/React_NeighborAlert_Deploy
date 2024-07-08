@@ -1,34 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Puedes usar cualquier ícono o imagen
 
 const ImageGallery = ({ images }) => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: true,
-  };
-
   return (
-    <div className="w-full mb-4">
-      <Slider {...settings}>
-        {images.map((image, index) => (
-          <div key={index} className="px-2">
-            <img src={image} alt={`Gallery image ${index + 1}`} className="w-full h-96 object-cover rounded-2xl" />
-          </div>
-        ))}
-      </Slider>
-    </div>
+    <Swiper
+    
+      modules={[Navigation, Pagination, Scrollbar, A11y]}
+      spaceBetween={0}
+      slidesPerView={1}
+      navigation
+      pagination={{
+        type: 'fraction',
+      }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
+      {images.map((image, index) => (
+        <SwiperSlide key={index}>
+          <img src={image} className="w-full h-96 object-cover rounded-2xl" alt={`Slide ${index + 1}`} />
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 };
 
-ImageGallery.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+
 
 export default ImageGallery;

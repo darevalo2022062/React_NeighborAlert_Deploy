@@ -19,6 +19,12 @@ export const userApi = createApi({
                 body: data,
             }),
         }),
+        deleteAccount: builder.mutation({
+            query: () => ({
+                url: 'user/',
+                method: 'DELETE'
+            }),
+        }),
         enterCommunity: builder.mutation({
             query: (data) => ({
                 url: 'user/community',
@@ -29,4 +35,4 @@ export const userApi = createApi({
     }),
 });
 
-export const { useLoginMutation, useRegisterMutation, useEnterCommunityMutation } = userApi;
+export const { useLoginMutation, useRegisterMutation, useDeleteAccountMutation, useEnterCommunityMutation } = userApi;

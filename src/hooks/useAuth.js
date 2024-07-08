@@ -13,6 +13,15 @@ const useAuth = () => {
 
     const { isAuthenticated, user } = useSelector((state) => state.user);
 
+    const handleError = (err) => {
+        console.log(err);
+        const errorMessage = err?.data?.errors?.[0]?.msg
+            || err?.data
+            || err?.data?.error
+            || 'An error occurred, please try again';
+        toast.error(errorMessage);
+    };
+
     const prepareFormData = (data) => {
         const formData = new FormData();
         Object.keys(data).forEach(key => {
@@ -28,17 +37,11 @@ const useAuth = () => {
     const handlerLogin = async (data) => {
         try {
             const loginRequest = await login(data).unwrap();
-            console.log(loginRequest)
             dispatch(setCredentials(loginRequest));
             navigate('/reports');
             toast.success('Successfully logged in');
         } catch (err) {
-            console.log(err)
-            const errorMessage = err?.data?.errors?.[0]?.msg
-                || err?.data
-                || err?.data.error
-                || 'An error occurred, please try again';
-            toast.error(errorMessage);
+            handleError(err);
         }
     };
 
@@ -49,11 +52,7 @@ const useAuth = () => {
             navigate('/login');
             toast.success('You have successfully registered');
         } catch (err) {
-            const errorMessage = err?.data?.errors?.[0]?.msg
-                || err?.data
-                || err?.data.error
-                || 'An error occurred, please try again';
-            toast.error(errorMessage);
+            handleError(err);
         }
     };
 

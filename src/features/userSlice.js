@@ -12,10 +12,9 @@ const userSlice = createSlice({
     reducers: {
         setCredentials: (state, action) => {
             const { user } = action.payload;
-            console.log(user)
-            state.user = user; // objeto 
-            state.token = user.token; // token 
-            state.isAuthenticated = true; // valida si esta loggeado 
+            state.user = user;
+            state.token = user.token;
+            state.isAuthenticated = true;
         },
         clearCredentials: (state) => {
             state.user = null;
