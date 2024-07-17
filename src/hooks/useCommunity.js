@@ -1,7 +1,9 @@
 import React from 'react'
-import { useGetCommunitiesQuery, useGetCommunityByIdQuery } from '../services/communityApi'
+import { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation } from '../services/communityApi'
 
- const useCommunity = () => {
+const [createCommunity] = useCreateCommunityMutation();
+
+const useCommunity = () => {
 
     const handleError = (err) => {
         console.log(err);
@@ -22,9 +24,21 @@ import { useGetCommunitiesQuery, useGetCommunityByIdQuery } from '../services/co
         return { data, isLoading };
     };
 
+    const createCommunity = async (data) => {
+
+        try {
+            await createCommunity(data).unwrap();
+            toast.success("Community Created Successfully");
+        } catch (err) {
+            handleError(err);
+        }
+
+    }
+
 
     return {
         getCommunityById,
+        createCommunity
     }
 }
 

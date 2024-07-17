@@ -2,6 +2,7 @@ import Navbar from '../components/Navbar'
 import useAuth from '../hooks/useAuth'
 import Footer from '../components/common/Footer';
 import EnterCommunity from '../components/report/EnterCommunity';
+import CreateCommunity from '../components/report/CreateCommunity';
 import { FormReport } from '../components/report/FormReport';
 import { Publication } from '../components/common/Publication';
 import usePost from '../hooks/usePost';
@@ -17,7 +18,11 @@ const Reports = () => {
         <>
             <Navbar />
             {user.idCommunity == null ? (
-                <EnterCommunity />
+                user.role === 'ADMIN' ? (
+                    <CreateCommunity />
+                ):(
+                    <EnterCommunity />
+                )
             ) : (isLoadingPosts ? (
                 <div className='min-h-[calc(100vh-96px)] flex justify-center items-center'>
                     <span className="loading loading-dots loading-lg"></span>
