@@ -71,7 +71,7 @@ export const Navbar = () => {
                                 <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar btn-lg">
                                     <div className="w-14 rounded-full">
                                         <img
-                                            alt="Tailwind CSS Navbar component"
+                                            alt="photo"
                                             src={user.img} />
                                     </div>
                                 </div>

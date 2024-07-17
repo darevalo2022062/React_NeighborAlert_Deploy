@@ -43,7 +43,7 @@ export const AccountSettings = () => {
     };
 
     return (
-        <div className="col-span-8 overflow-hidden rounded-xl sm:bg-gray-50 sm:px-8 sm:shadow">
+        <div className="col-span-8 overflow-hidden rounded-xl sm:bg-gray-50 sm:px-8 sm:shadow mb-2">
             <div className="pt-4">
                 <h1 className="py-2 text-2xl font-semibold">Account settings</h1>
                 <p className="font- text-slate-600">Manage your account settings to keep your information up-to-date and secure.</p>

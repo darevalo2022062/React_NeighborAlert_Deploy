@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { ComboBox } from '../common/ComboBox';
 import Input from '../common/Input';
@@ -6,14 +6,12 @@ import { InputFile } from '../common/InputFile';
 import TextArea from '../common/TextArea';
 import { CheckBox } from '../common/CheckBox';
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
 import usePost from '../../hooks/usePost';
 
 export const FormReport = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [isOpen, setIsOpen] = useState(false);
     const { createPost, loading } = usePost();
-    
 
     const options = [
         { value: '#general', label: 'General' },
@@ -24,9 +22,9 @@ export const FormReport = () => {
     ];
 
     const onSubmit = async (data) => {
-        console.log(data)
-        data.title = data.title.toUpperCase()
-        createPost(data, closeModal)
+        console.log(data);
+        data.title = data.title.toUpperCase();
+        createPost(data, closeModal);
     };
 
     function closeModal() {
@@ -72,10 +70,9 @@ export const FormReport = () => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-
-                                    <div className="mt-0">
-                                        <form className="max-w-5xl w-full p-8" onSubmit={handleSubmit(onSubmit)}>
+                                <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-xl bg-white p-4 md:p-6 text-left align-middle shadow-xl transition-all">
+                                    <div className="mt-0 max-h-[80vh] overflow-y-auto">
+                                        <form className="max-w-5xl w-full p-4 md:p-8" onSubmit={handleSubmit(onSubmit)}>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="mb-4">
                                                     <Input
@@ -83,7 +80,7 @@ export const FormReport = () => {
                                                         color={'text-gray-900'}
                                                         label={"Title"}
                                                         name={'title'}
-                                                        placeholder={'Enter your email address'}
+                                                        placeholder={'Enter your title'}
                                                         register={register}
                                                         rules={{
                                                             required: 'Title is required'
@@ -131,7 +128,7 @@ export const FormReport = () => {
                                             <div className="flex justify-end">
                                                 <button
                                                     type="button"
-                                                    className="inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                                                    className="inline-flex justify-center rounded-full border border-transparent bg-rose-500 px-7 py-4 mx-2 text-sm text-white font-bold hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                                                     onClick={closeModal}
                                                 >
                                                     Close
@@ -141,12 +138,9 @@ export const FormReport = () => {
                                                     className="bg-[#84BD00] hover:bg-[#92c752] text-white font-bold py-4 px-6 rounded-full focus:outline-none focus:shadow-outline"
                                                 >
                                                     {loading ? 'Creating publication...' : 'Create Post'}
-
                                                 </button>
                                             </div>
                                         </form>
-                                    </div>
-                                    <div className="mt-4">
                                     </div>
                                 </Dialog.Panel>
                             </Transition.Child>
@@ -156,4 +150,4 @@ export const FormReport = () => {
             </Transition>
         </>
     );
-}
+};
