@@ -6,10 +6,11 @@ import { InputFile } from '../common/InputFile';
 import TextArea from '../common/TextArea';
 import { CheckBox } from '../common/CheckBox';
 import { Dialog, Transition } from '@headlessui/react';
+import { FaPen, FaPlus } from 'react-icons/fa';
 import usePost from '../../hooks/usePost';
 
 export const FormReport = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset, setValue } = useForm();
     const [isOpen, setIsOpen] = useState(false);
     const { createPost, loading } = usePost();
 
@@ -23,18 +24,8 @@ export const FormReport = () => {
 
     useEffect(() => {
         const originalOverflow = document.body.style.overflow;
-        if (isOpen) {
-            // Disable scroll on open
-            document.body.style.overflow = 'hidden';
-        } else {
-            // Restore scroll on close
-            document.body.style.overflow = originalOverflow;
-        }
-
-        // Cleanup on unmount
-        return () => {
-            document.body.style.overflow = originalOverflow;
-        };
+        document.body.style.overflow = isOpen ? 'hidden' : originalOverflow;
+        return () => document.body.style.overflow = originalOverflow;
     }, [isOpen]);
 
     const onSubmit = async (data) => {
@@ -45,6 +36,7 @@ export const FormReport = () => {
 
     function closeModal() {
         setIsOpen(false);
+        reset();
     }
 
     function openModal() {
@@ -53,13 +45,21 @@ export const FormReport = () => {
 
     return (
         <>
-            <button
-                type="button"
-                onClick={openModal}
-                className="bg-[#84BD00] hover:bg-[#92c752] text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
-            >
-                Create post
-            </button>
+            <div className="relative flex items-center w-full  mx-auto mt-5">
+                <div
+                    className="relative w-full cursor-pointer py-4 pl-10 pr-5 rounded-3xl shadow-lg focus:outline-none focus:ring-2 focus:ring-[#84BD00] focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl bg-white border border-gray-300"
+                    onClick={openModal}
+                >
+                    <input
+                        type="text"
+                        readOnly
+                        placeholder="Click to create a post..."
+                        className="w-full bg-transparent focus:outline-none"
+                    />
+                    <FaPlus className="absolute top-1/2 transform -translate-y-1/2 right-4 text-[#84BD00] font-bold" size={18} />
+                </div>
+            </div>
+
 
             <Transition appear show={isOpen} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>
@@ -72,7 +72,7 @@ export const FormReport = () => {
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0"
                     >
-                        <div className="fixed inset-0 bg-black bg-opacity-25" />
+                        <div className="fixed inset-0 bg-black bg-opacity-50" />
                     </Transition.Child>
 
                     <div className="fixed inset-0 overflow-y-auto">
@@ -87,7 +87,7 @@ export const FormReport = () => {
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-xl bg-white text-left align-middle shadow-xl transition-all">
-                                    <div className="mt-0 max-h-[80vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[#84BD00] scrollbar-track-[#f5f5f5] scrollbar-thumb-rounded scrollbar-track-rounded">
+                                    <div className="mt-0 max-h-[95vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[#84BD00] scrollbar-track-[#f5f5f5] scrollbar-thumb-rounded scrollbar-track-rounded">
                                         <form className="max-w-5xl w-full p-8 md:p-14" onSubmit={handleSubmit(onSubmit)}>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="mb-4">
@@ -98,10 +98,7 @@ export const FormReport = () => {
                                                         name={'title'}
                                                         placeholder={'Enter your title'}
                                                         register={register}
-                                                        rules={{
-                                                            required: 'Title is required'
-                                                        }}
-                                                        error={errors.title}
+                                                        optional={true}
                                                     />
                                                 </div>
                                                 <div className="mb-4">
@@ -131,7 +128,7 @@ export const FormReport = () => {
                                                 />
                                             </div>
                                             <div className="mb-4">
-                                                <InputFile />
+                                                <InputFile register={register} setValue={setValue} name="file" multiple />
                                             </div>
                                             <div className="mb-4 flex items-center">
                                                 <CheckBox

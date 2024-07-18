@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-import { FaRegEye } from "react-icons/fa";
-import { FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
-const Input = ({ label, name, type, placeholder, rules, register, error, color }) => {
+const Input = ({ label, name, type, defaultValue, placeholder, optional, rules, register, error, color }) => {
     const [showPassword, setShowPassword] = useState(false);
 
-    const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
-    };
+    const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
     return (
         <>
-            <label className={`block ${color} font-bold mb-2`} htmlFor={name}>{label}</label>
+            {label && (
+                <label className={`block ${color} font-bold mb-2`} htmlFor={name}>
+                    {label} {optional && <span className={`${color} font-normal`}>(optional)</span>}
+                </label>
+            )}
             <div className="relative">
                 <input
                     id={name}
-                    type={showPassword ? 'text' : type}
+                    type={showPassword && type === 'password' ? 'text' : type}
                     className="bg-gray-200 w-full text-gray-800 text-lg px-4 py-3.5 rounded-md transition-all focus:outline-none focus:ring-[3px] focus:ring-[#84BD00]"
                     placeholder={placeholder}
+                    defaultValue={defaultValue}
                     {...register(name, rules)}
                 />
                 {type === 'password' && (
@@ -31,7 +33,9 @@ const Input = ({ label, name, type, placeholder, rules, register, error, color }
                 )}
             </div>
             {error && (
-                <span className="text-red-500 text-sm font-semibold mt-1">{error.message}</span>
+                <span className="text-red-500 text-sm font-semibold mt-1">
+                    {error.message}
+                </span>
             )}
         </>
     );

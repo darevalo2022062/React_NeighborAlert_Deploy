@@ -13,7 +13,6 @@ import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Puedes usar cualq
 const ImageGallery = ({ images }) => {
   return (
     <Swiper
-    
       modules={[Navigation, Pagination, Scrollbar, A11y]}
       spaceBetween={0}
       slidesPerView={1}
@@ -21,12 +20,11 @@ const ImageGallery = ({ images }) => {
       pagination={{
         type: 'fraction',
       }}
-      onSwiper={(swiper) => console.log(swiper)}
       onSlideChange={() => console.log('slide change')}
     >
       {images.map((image, index) => (
         <SwiperSlide key={index}>
-          <img src={image} className="w-full h-96 object-cover rounded-2xl" alt={`Slide ${index + 1}`} />
+          <img src={image} className="w-full h-[29rem] object-cover" alt={`Slide ${index + 1}`} />
         </SwiperSlide>
       ))}
     </Swiper>

@@ -16,6 +16,20 @@ const usePost = () => {
         refetch();
     }, [refetch]);
 
+    const prepareFormData = (data) => {
+        const formData = new FormData();
+        Object.keys(data).forEach(key => {
+            if (key === 'file' && data[key].length > 0) {
+                for (let i = 0; i < data[key].length; i++) {
+                    formData.append(key, data[key][i]);
+                }
+            } else {
+                formData.append(key, data[key]);
+            }
+        });
+        return formData;
+    };
+
     const handleError = (err) => {
         console.log(err);
         const errorMessage = err?.data?.errors?.[0]?.msg
@@ -27,9 +41,9 @@ const usePost = () => {
 
     const handlerCreatePost = async (data, closeModal) => {
         try {
-            console.log(user.idCommunity);
-            const postData = { ...data, idCommunity: user.idCommunity };
-            await createPost(postData).unwrap();
+            const formData = prepareFormData({ ...data, idCommunity: user.idCommunity });
+            console.log("🚀 ~ handlerCreatePost ~ formData:", formData)
+            await createPost(formData).unwrap();
             closeModal();
             toast.success('Your publication has been created');
             navigate('/reports');
