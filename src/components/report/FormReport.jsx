@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { useForm } from 'react-hook-form';
 import { ComboBox } from '../common/ComboBox';
 import Input from '../common/Input';
@@ -20,6 +20,22 @@ export const FormReport = () => {
         { value: '#job', label: 'Job' },
         { value: '#housing', label: 'Housing' }
     ];
+
+    useEffect(() => {
+        const originalOverflow = document.body.style.overflow;
+        if (isOpen) {
+            // Disable scroll on open
+            document.body.style.overflow = 'hidden';
+        } else {
+            // Restore scroll on close
+            document.body.style.overflow = originalOverflow;
+        }
+
+        // Cleanup on unmount
+        return () => {
+            document.body.style.overflow = originalOverflow;
+        };
+    }, [isOpen]);
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -70,9 +86,9 @@ export const FormReport = () => {
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-xl bg-white p-4 md:p-6 text-left align-middle shadow-xl transition-all">
-                                    <div className="mt-0 max-h-[80vh] overflow-y-auto">
-                                        <form className="max-w-5xl w-full p-4 md:p-8" onSubmit={handleSubmit(onSubmit)}>
+                                <Dialog.Panel className="w-full max-w-4xl transform overflow-hidden rounded-xl bg-white text-left align-middle shadow-xl transition-all">
+                                    <div className="mt-0 max-h-[80vh] overflow-y-auto scrollbar-thin scrollbar-thumb-[#84BD00] scrollbar-track-[#f5f5f5] scrollbar-thumb-rounded scrollbar-track-rounded">
+                                        <form className="max-w-5xl w-full p-8 md:p-14" onSubmit={handleSubmit(onSubmit)}>
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="mb-4">
                                                     <Input

@@ -1,7 +1,9 @@
 import React from 'react'
 import { useGetCommunitiesQuery, useGetCommunityByIdQuery } from '../services/communityApi'
+import { toast } from 'react-hot-toast';
 
- const useCommunity = () => {
+
+const useCommunity = () => {
 
     const handleError = (err) => {
         console.log(err);
@@ -9,6 +11,7 @@ import { useGetCommunitiesQuery, useGetCommunityByIdQuery } from '../services/co
             || err?.data
             || err?.data?.error
             || 'An error occurred, please try again';
+
         toast.error(errorMessage);
     };
 
@@ -16,10 +19,10 @@ import { useGetCommunitiesQuery, useGetCommunityByIdQuery } from '../services/co
         const { data, error, isLoading } = useGetCommunityByIdQuery(id, {
             skip: !id,
         });
+        console.log('data', error)
+        if (error) return handleError(error);
 
-        if (error) handleError(error);
-
-        return { data, isLoading };
+        return { data, isLoading, error };
     };
 
 
