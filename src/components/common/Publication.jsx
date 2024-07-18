@@ -4,6 +4,7 @@ import { CiShare2 } from "react-icons/ci";
 import { GoComment } from "react-icons/go";
 import { SlOptions } from "react-icons/sl";
 import ImageGallery from './ImageGallery';
+import useComment from '../../hooks/useComment';
 
 const formatDate = (isoString) => {
     const date = parseISO(isoString);
@@ -49,10 +50,19 @@ const DropdownMenu = ({ user, postUserId, deletePost, postId }) => {
 export const Publication = ({ post, deletePost, user }) => {
     const { _id, idUser, title, content, category, anonymous, createdAt, file } = post;
     const [showFullContent, setShowFullContent] = useState(false);
+    const [commentContent, setCommentContent] = useState('');
+    const { createComment } = useComment();
 
     const toggleContent = () => setShowFullContent(!showFullContent);
 
     const contentPreview = content.length > 100 ? `${content.slice(0, 100)}...` : content;
+
+    const handleCommentChange = (e) => setCommentContent(e.target.value);
+
+    const handleAddComment = async () => {
+        await createComment({ idPost: _id, content: commentContent, anonymous: false });
+        setCommentContent('');
+    };
 
     return (
         <div className="border bg-white mt-6 shadow-2xl rounded-xl w-full">
@@ -90,7 +100,21 @@ export const Publication = ({ post, deletePost, user }) => {
                     alt="User profile"
                 />
                 <div className="flex items-center justify-between bg-gray-50 h-12 w-11/12 border rounded-2xl overflow-hidden px-4">
-                    <input type="text" className="h-full w-full bg-gray-50 outline-none" placeholder="Write your comment..." name="comment" />
+                    <input 
+                        type="text" 
+                        className="h-full w-full bg-gray-50 outline-none" 
+                        placeholder="Write your comment..." 
+                        name="comment" 
+                        value={commentContent}
+                        onChange={handleCommentChange}
+                    />
+                    <button
+                        onClick={handleAddComment}
+                        className={`ml-2 px-4 py-2 ${commentContent ? 'bg-blue-500 text-white' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+                        disabled={!commentContent}
+                    >
+                        Comment
+                    </button>
                 </div>
             </div>
         </div>
