@@ -1,4 +1,4 @@
-import { useCreateCommentMutation } from "../services/commentApi";
+import { useCreateCommentMutation, useGetCommentsByPostQuery } from "../services/commentApi";
 import toast from "react-hot-toast";
 
 const useComment = () => {
@@ -15,6 +15,9 @@ const useComment = () => {
             throw error;
         }
     };
+
+
+    create
 
     return { createComment };
 };

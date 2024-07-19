@@ -26,7 +26,7 @@ const Reports = () => {
                 <div>Error: {error.message}</div>
             ) : (
                 <div className='min-h-[calc(100vh-96px)] flex justify-center mb-6'>
-                    <div className='max-w-lg w-full'>
+                    <div className='max-w-md w-full'>
                         <FormReport  />
                         <div className='flex flex-col items-center'>
                             {posts.map(post => (

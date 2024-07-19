@@ -12,7 +12,16 @@ export const commentApi = createApi({
                 body: data,
             }),
         }),
+        getCommentsByPost: builder.query({
+            query: (id) => ({
+                url: `comment/getComments/${id}`,
+                method: 'GET',
+            }),
+            providesTags: ['Posts'],
+            transformResponse: (response) => response.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
+        }),
+
     }),
 });
 
-export const { useCreateCommentMutation } = commentApi;
+export const { useCreateCommentMutation, useGetCommentsByPostQuery } = commentApi;
