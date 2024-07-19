@@ -21,6 +21,24 @@ export const communityApi = createApi({
         }),
 
         //name, location, img, description
+        UpdateCommunity: builder.mutation({
+            query: (data) => ({
+                url: `/community/${data.id}`,
+                method: 'PUT',
+                body: data,
+            })
+        }),
+
+        //name, location, img, description
+        UpdateCommunityImg: builder.mutation({
+            query: (data) => ({
+                url: `/community/${data.get('id')}`,
+                method: 'PUT',
+                body: data,
+            })
+        }),
+
+        //name, location, img, description
         createCommunity: builder.mutation({
             query: (data) => ({
                 url: '/community/',
@@ -28,7 +46,15 @@ export const communityApi = createApi({
                 body: data,
             })
         }),
+
+        deleteCommunity: builder.mutation({
+            query: (data) => ({
+                url: `/community/${data.id}`,
+                method: 'DELETE',
+                body: data,
+            })
+        })
     }),
 });
 
-export const { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation } = communityApi;
+export const { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation, useUpdateCommunityMutation, useUpdateCommunityImgMutation, useDeleteCommunityMutation } = communityApi;

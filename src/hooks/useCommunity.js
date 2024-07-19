@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation } from '../services/communityApi'
+import { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation, useUpdateCommunityMutation, useDeleteCommunityMutation, useUpdateCommunityImgMutation } from '../services/communityApi'
 import { updateCredentials, clearCredentials } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
 import toast from "react-hot-toast";
@@ -7,6 +7,9 @@ import toast from "react-hot-toast";
 const useCommunity = () => {
     const dispatch = useDispatch();
     const [createOnceCommunity, { isLoading: isLoadingCreateCommunity }] = useCreateCommunityMutation();
+    const [updateOnceCommunity, { isLoading: isLoadingUpdateCommunity }] = useUpdateCommunityMutation();
+    const [updateOnceCommunityImg, { isLoading: isLoadingUpdateCommunityImg }] = useUpdateCommunityImgMutation();
+    const [deleteOnceCommunity, { isLoading: isLoadingDeleteCommunity }] = useDeleteCommunityMutation();
 
     const prepareFormData = (data) => {
         const formData = new FormData();
@@ -54,11 +57,35 @@ const useCommunity = () => {
 
     }
 
+    const UpdateCommunity = async (data) => {
+        console.log('Data in community:', data); //Debugging
+        try {
+            if (data.img !== null && data.img !== "" && data.img !== undefined) {
+                console.log("image detected");
+                const formData = prepareFormData(data);
+                console.log("DATA RESULTANTE: ");
+                formData.forEach((value, key) => {
+                    console.log(`${key}: ${value}`);
+                });
+                return await updateOnceCommunityImg(formData).unwrap();
+            } else {
+                console.log("no image detected");
+                return await updateOnceCommunity(data).unwrap();
+            }
+            toast.success("Community Updated Successfully");
+        } catch (err) {
+            handleError(err);
+        }
+    }
+
+    
 
     return {
         getCommunityById,
         createCommunity,
-        isLoading: isLoadingCreateCommunity
+        isLoading: isLoadingCreateCommunity,
+        UpdateCommunity,
+        isLoadingUpdateCommunity
     }
 }
 
