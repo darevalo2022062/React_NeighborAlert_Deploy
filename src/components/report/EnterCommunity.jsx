@@ -19,8 +19,6 @@ const EnterCommunity = () => {
         setIsOpen(false);
     };
 
-
-
     const onSubmit = (data) => {
         console.log('Código ingresado:', data);
         enterCommunity(data)

@@ -19,7 +19,16 @@ export const communityApi = createApi({
             }),
 
         }),
+
+        //name, location, img, description
+        createCommunity: builder.mutation({
+            query: (data) => ({
+                url: '/community/',
+                method: 'POST',
+                body: data,
+            })
+        }),
     }),
 });
 
-export const { useGetCommunitiesQuery, useGetCommunityByIdQuery } = communityApi;
+export const { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation } = communityApi;

@@ -1,9 +1,28 @@
 import React from 'react'
-import { useGetCommunitiesQuery, useGetCommunityByIdQuery } from '../services/communityApi'
+import { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation } from '../services/communityApi'
+import { updateCredentials, clearCredentials } from '../features/userSlice';
+import { useDispatch } from 'react-redux';
+import toast from "react-hot-toast";
+
+
 import { toast } from 'react-hot-toast';
 
 
 const useCommunity = () => {
+    const dispatch = useDispatch();
+    const [createOnceCommunity, { isLoading: isLoadingCreateCommunity } ] = useCreateCommunityMutation();
+
+    const prepareFormData = (data) => {
+        const formData = new FormData();
+        Object.keys(data).forEach(key => {
+            if (key === 'img' && data[key][0]) {
+                formData.append(key, data[key][0]); // Append file
+            } else {
+                formData.append(key, data[key]);
+            }
+        });
+        return formData;
+    };
 
     const handleError = (err) => {
         console.log(err);
@@ -19,15 +38,45 @@ const useCommunity = () => {
         const { data, error, isLoading } = useGetCommunityByIdQuery(id, {
             skip: !id,
         });
-        console.log('data', error)
-        if (error) return handleError(error);
 
-        return { data, isLoading, error };
+        if (error) handleError(error);
+
+        return { data, isLoading };
     };
+
+    const createCommunity = async (data) => {
+        console.log('Data in community:', data);
+        try {
+            const formData = prepareFormData(data);
+            const user = await createOnceCommunity(formData).unwrap();
+            console.log("Data que devuelve: ", user);
+            dispatch(updateCredentials(user))
+            toast.success("Community Created Successfully");
+        } catch (err) {
+            handleError(err);
+        }
+
+    }
+
+    const createCommunity = async (data) => {
+        console.log('Data in community:', data);
+        try {
+            const formData = prepareFormData(data);
+            const user = await createOnceCommunity(formData).unwrap();
+            console.log("Data que devuelve: ", user);
+            dispatch(updateCredentials(user))
+            toast.success("Community Created Successfully");
+        } catch (err) {
+            handleError(err);
+        }
+
+    }
 
 
     return {
         getCommunityById,
+        createCommunity,
+        isLoading: isLoadingCreateCommunity
     }
 }
 
