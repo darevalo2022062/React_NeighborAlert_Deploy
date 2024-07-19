@@ -10,6 +10,7 @@ export const AccountSettings = () => {
     const { user } = useAuth();
     const { deleteAccount } = useUser();
     const { register, handleSubmit, formState: { errors } } = useForm();
+    
 
     const handleDeleteAccount = () => {
         toast(
