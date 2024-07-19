@@ -8,7 +8,7 @@ const useRequest = () => {
 
     const handleError = (err) => {
         console.log(err);
-        const errorMessage = err?.data?.errors?.[0]?.msg
+        const errorMessage = err?.data?.message
             || err?.data
             || err?.data?.error
             || 'An error occurred, please try again';
@@ -20,10 +20,12 @@ const useRequest = () => {
         console.log('Data in request:', data);
         try {
             await createOnceRequest(data).unwrap();
-            //console.log("Data que devuelve: ", user);
             toast.success("Request Created Successfully");
+
         } catch (err) {
+
             handleError(err);
+
         }
 
     }

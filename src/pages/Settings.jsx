@@ -3,13 +3,13 @@ import Navbar from '../components/Navbar';
 import { AccountSettings } from '../components/settings/AccountSettings';
 import { Apply } from '../components/settings/Apply';
 import { useState } from 'react';
-import useUser from '../hooks/useUser';
+import useAuth from '../hooks/useAuth';
 
 
 const Settings = () => {
 
     const [active, setActive] = useState('account');
-    const { user } = useUser();
+    const { user } = useAuth();
     console.log(active)
 
     return (
@@ -20,21 +20,28 @@ const Settings = () => {
                 <div className="grid grid-cols-8 pt-3 sm:grid-cols-10">
                     <div className="col-span-2 hidden sm:block">
                         <ul>
-
                             <li cursor="pointer"
                                 onClick={() => setActive('account')}
                                 className={`mt-5 border-l-2 px-2 py-2 font-semibold ${active === 'account' ? 'border-l-[#84BD00] text-[#84BD00] cursor-pointer' : 'border-l-gray-400 text-gray-400 cursor-pointer'}`}
                             >
                                 Account
                             </li>
+                            {
+                                user.role === 'USER' ? (
+                                    <li
+                                        onClick={() => setActive('apply')}
+                                        className={`mt-5 border-l-2 px-2 py-2 font-semibold ${active === 'apply' ? 'border-l-[#84BD00] text-[#84BD00] cursor-pointer' : 'border-l-gray-400 text-gray-400 cursor-pointer'}`}
+                                    >
+                                        Apply to be admin
+                                    </li>
+                                ) : (
+                                    null
+                                )
+                            }
 
 
-                            <li
-                                onClick={() => setActive('apply')}
-                                className={`mt-5 border-l-2 px-2 py-2 font-semibold ${active === 'apply' ? 'border-l-[#84BD00] text-[#84BD00] cursor-pointer' : 'border-l-gray-400 text-gray-400 cursor-pointer'}`}
-                            >
-                                Apply to be admin
-                            </li>
+
+
 
                         </ul>
                     </div>
