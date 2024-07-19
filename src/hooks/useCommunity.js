@@ -4,13 +4,9 @@ import { updateCredentials, clearCredentials } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
 import toast from "react-hot-toast";
 
-
-import { toast } from 'react-hot-toast';
-
-
 const useCommunity = () => {
     const dispatch = useDispatch();
-    const [createOnceCommunity, { isLoading: isLoadingCreateCommunity } ] = useCreateCommunityMutation();
+    const [createOnceCommunity, { isLoading: isLoadingCreateCommunity }] = useCreateCommunityMutation();
 
     const prepareFormData = (data) => {
         const formData = new FormData();
@@ -43,20 +39,6 @@ const useCommunity = () => {
 
         return { data, isLoading };
     };
-
-    const createCommunity = async (data) => {
-        console.log('Data in community:', data);
-        try {
-            const formData = prepareFormData(data);
-            const user = await createOnceCommunity(formData).unwrap();
-            console.log("Data que devuelve: ", user);
-            dispatch(updateCredentials(user))
-            toast.success("Community Created Successfully");
-        } catch (err) {
-            handleError(err);
-        }
-
-    }
 
     const createCommunity = async (data) => {
         console.log('Data in community:', data);
