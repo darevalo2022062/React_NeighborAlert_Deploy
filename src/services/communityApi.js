@@ -47,14 +47,7 @@ export const communityApi = createApi({
             })
         }),
 
-        deleteCommunity: builder.mutation({
-            query: (data) => ({
-                url: `/community/${data.id}`,
-                method: 'DELETE',
-                body: data,
-            })
-        })
     }),
 });
 
-export const { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation, useUpdateCommunityMutation, useUpdateCommunityImgMutation, useDeleteCommunityMutation } = communityApi;
+export const { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation, useUpdateCommunityMutation, useUpdateCommunityImgMutation } = communityApi;

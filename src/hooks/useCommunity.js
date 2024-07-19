@@ -9,7 +9,6 @@ const useCommunity = () => {
     const [createOnceCommunity, { isLoading: isLoadingCreateCommunity }] = useCreateCommunityMutation();
     const [updateOnceCommunity, { isLoading: isLoadingUpdateCommunity }] = useUpdateCommunityMutation();
     const [updateOnceCommunityImg, { isLoading: isLoadingUpdateCommunityImg }] = useUpdateCommunityImgMutation();
-    const [deleteOnceCommunity, { isLoading: isLoadingDeleteCommunity }] = useDeleteCommunityMutation();
 
     const prepareFormData = (data) => {
         const formData = new FormData();
@@ -77,8 +76,6 @@ const useCommunity = () => {
             handleError(err);
         }
     }
-
-    
 
     return {
         getCommunityById,
