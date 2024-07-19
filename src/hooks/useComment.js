@@ -1,8 +1,10 @@
 import { useCreateCommentMutation, useGetCommentsByPostQuery } from "../services/commentApi";
 import toast from "react-hot-toast";
 
-const useComment = () => {
+const useComment = (postId) => {
     const [createCommentMutation] = useCreateCommentMutation();
+    const { data: comments, error, isLoading } = useGetCommentsByPostQuery(postId);
+    console.log("🚀 ~ useComment ~ comments:", comments)
 
     const createComment = async (data) => {
         try {
@@ -16,10 +18,15 @@ const useComment = () => {
         }
     };
 
+    const quantity = comments ? comments.length : 0;
 
-    create
-
-    return { createComment };
+    return {
+        createComment,
+        comments,
+        error,
+        isLoading,
+        quantity
+    };
 };
 
 export default useComment;

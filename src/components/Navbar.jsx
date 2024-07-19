@@ -53,7 +53,6 @@ export const Navbar = () => {
                         {isAuthenticated ? (
                             <>
                                 <Link to="/reports" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">Reports</Link>
-                                <Link to="/i-reporter" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">Communities</Link>
                                 <Link to="/community" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">My community</Link>
                             </>
                         ) : (
@@ -61,7 +60,6 @@ export const Navbar = () => {
                                 <Link to="/" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">Home</Link>
                                 <Link to="/about" className="text-white  hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">About Us</Link>
                                 <Link to="/how-to-publish" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">How to publish</Link>
-                                <Link to="/confidentiality" className="text-white hover:text-[#84BD00] transition duration-150 ease-in-out font-semibold">Confidentiality</Link>
                             </>
                         )}
                     </div>

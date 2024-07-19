@@ -8,8 +8,7 @@ const Footer = () => {
                 <nav className="grid grid-flow-col gap-4">
                     <Link to="/" className="cursor-pointer text-white hover:text-[#84BD00] transition duration-150 ease-in-out">Home</Link>
                     <Link to="/about" className="cursor-pointer text-white hover:text-[#84BD00] transition duration-150 ease-in-out">About us</Link>
-                    <a className="link link-hover">Jobs</a>
-                    <a className="link link-hover">Press kit</a>
+                    <Link to="/how-to-publish" className="cursor-pointer text-white hover:text-[#84BD00] transition duration-150 ease-in-out">How to ublish</Link>
                 </nav>
                 <nav>
                     <div className="grid grid-flow-col gap-4">

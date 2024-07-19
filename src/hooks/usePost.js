@@ -1,4 +1,4 @@
-import { useCreatePostMutation, useGetPostsByCommunityQuery, useDeletePostMutation } from "../services/postApi";
+import { useCreatePostMutation, useGetPostsByCommunityQuery, useDeletePostMutation, useGetMyPostQuery } from "../services/postApi";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAuth from "./useAuth";
@@ -7,14 +7,9 @@ import { useEffect } from "react";
 const usePost = () => {
     const [createPost, { isLoading: isLoadingCreatePost }] = useCreatePostMutation();
     const [deletePost] = useDeletePostMutation();
-    const { data: posts, error, isLoading: isLoadingPosts, refetch } = useGetPostsByCommunityQuery();
 
     const { user } = useAuth();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        refetch();
-    }, [refetch]);
 
     const prepareFormData = (data) => {
         const formData = new FormData();
@@ -28,6 +23,17 @@ const usePost = () => {
             }
         });
         return formData;
+    };
+
+    const handlerGetPostByCommunity = () => {
+        const { data, error, isLoading, refetch } = useGetPostsByCommunityQuery();
+        console.log("🚀 ~ handlerGetPostByCommunity ~ useGetPostsByCommunityQuery:", useGetPostsByCommunityQuery)
+        return { data, error, isLoading, refetch };
+    };
+
+    const handlerGetMyPost = () => {
+        const { data, error, isLoading, refetch } = useGetMyPostQuery();
+        return { data, error, isLoading, refetch };
     };
 
     const handleError = (err) => {
@@ -65,9 +71,8 @@ const usePost = () => {
         loading: isLoadingCreatePost,
         createPost: handlerCreatePost,
         deletePost: handlerDeletePost,
-        posts,
-        isLoadingPosts,
-        error
+        getMyPost: handlerGetMyPost,
+        getPostByCommunity: handlerGetPostByCommunity,
     };
 };
 

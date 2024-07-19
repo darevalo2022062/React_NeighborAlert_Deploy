@@ -4,6 +4,7 @@ import baseQuery from './baseQuery';
 export const commentApi = createApi({
     reducerPath: 'commentApi',
     baseQuery: baseQuery,
+    tagTypes: ['Posts'],
     endpoints: (builder) => ({
         createComment: builder.mutation({
             query: (data) => ({
@@ -11,16 +12,16 @@ export const commentApi = createApi({
                 method: 'POST',
                 body: data,
             }),
+            invalidatesTags: ['Comments'],
         }),
         getCommentsByPost: builder.query({
             query: (id) => ({
                 url: `comment/getComments/${id}`,
                 method: 'GET',
             }),
-            providesTags: ['Posts'],
+            providesTags: ['Comments'],
             transformResponse: (response) => response.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
         }),
-
     }),
 });
 
