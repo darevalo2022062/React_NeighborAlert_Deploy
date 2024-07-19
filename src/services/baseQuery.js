@@ -4,7 +4,6 @@ const baseQuery = fetchBaseQuery({
     baseUrl: 'http://127.0.0.1:3000/neighbor/v1',
     prepareHeaders: (headers, { getState }) => {
         const state = getState();
-        console.log("🚀 ~ state:", state)
         const { token } = state.user || {};
 
         if (token) {

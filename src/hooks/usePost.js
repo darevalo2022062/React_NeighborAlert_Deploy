@@ -41,8 +41,8 @@ const usePost = () => {
 
     const handlerCreatePost = async (data, closeModal) => {
         try {
+            console.log("🚀 ~ handlerCreatePost ~ data:", data)
             const formData = prepareFormData({ ...data, idCommunity: user.idCommunity });
-            console.log("🚀 ~ handlerCreatePost ~ formData:", formData)
             await createPost(formData).unwrap();
             closeModal();
             toast.success('Your publication has been created');

@@ -17,7 +17,7 @@ export const Publication = ({ post, deletePost, user }) => {
         <div className="border bg-white mt-6 shadow-2xl rounded-xl w-full">
             <div className="flex items-center justify-between p-5">
                 <UserInfo anonymous={anonymous} user={user} createdAt={createdAt} />
-                <DropdownMenu user={user} postUserId={idUser?._id} deletePost={deletePost} postId={_id} />
+                <DropdownMenu user={user} postUserId={idUser} deletePost={deletePost} postId={_id} />
             </div>
             <div className="whitespace-pre-wrap  px-5">
                 <h1 className="text-2xl font-bold">{title}</h1>
@@ -35,7 +35,7 @@ export const Publication = ({ post, deletePost, user }) => {
             <div className="h-16 border-b flex items-center justify-around px-5">
                 <button className="w-1/2  flex items-center justify-center text-center gap-3">
                     <GoComment size='24' color='gray' />
-                   10 Comments
+                    10 Comments
                 </button>
                 <div className="divider divider-horizontal"></div>
                 <button className="w-1/2 flex items-center justify-center text-center gap-3">
@@ -73,13 +73,14 @@ const UserInfo = ({ anonymous, user, createdAt }) => {
 };
 
 const DropdownMenu = ({ user, postUserId, deletePost, postId }) => {
+
     return (
         <div className="dropdown dropdown-bottom dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-circle btn-sm m-1 btn-ghost">
                 <SlOptions />
             </div>
             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                {user && user.id === postUserId && (
+                {user && user.id === postUserId._id && (
                     <li><button onClick={() => deletePost(postId)}>Delete post</button></li>
                 )}
                 <li><a>Item 1</a></li>
