@@ -1,20 +1,20 @@
 import React from 'react'
 import { useState } from 'react'
-import { useEffect } from 'react'
 import useAuth from '../../hooks/useAuth'
 import { useForm } from 'react-hook-form'
 import Input from '../common/Input'
+import useCommunity from '../../hooks/useCommunity'
+import Loading from '../common/Loading'
 
 export const Section = ({ community }) => {
     const { user } = useAuth();
     const [previewImage, setPreviewImage] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [updateCommunity, setUpdateCommunity] = useState(community);
     const [onEditSubmit, setOnEditSubmit] = useState(false);
+    const { UpdateCommunity, isLoadingUpdateCommunity } = useCommunity();
     let { register: formRegister, handleSubmit, formState: { errors }, watch, reset } = useForm();
-    const { name, location, description, img, createdAt } = community;
-
-    console.log(formRegister.name.value);
-
+    const { name, location, description, img, createdAt, codeAccess } = updateCommunity;
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -25,8 +25,13 @@ export const Section = ({ community }) => {
     };
 
     const onSubmit = async (data) => {
-        console.log('Data:', data);
-
+        data.id = user.idCommunity;
+        data.img = data.img[0];
+        const newCommunityData = await UpdateCommunity(data);
+        setUpdateCommunity(newCommunityData);
+        setPreviewImage(null);
+        setIsEditModalOpen(false);
+        reset();
     }
 
     const handleEdit = () => {
@@ -35,13 +40,17 @@ export const Section = ({ community }) => {
     }
 
     const handleDelete = () => {
-
+        console.log('Delete');
+        
     }
 
     const handleEditCancel = () => {
-        formRegister.name.value = '';
         setPreviewImage(null);
         setIsEditModalOpen(false);
+    }
+
+    if (isLoadingUpdateCommunity) {
+        return <Loading />
     }
 
     return (
@@ -71,12 +80,17 @@ export const Section = ({ community }) => {
                     <div className="min-h-[calc(100vh-96px)] pb-6 mx-auto">
                         <img src={img} alt="Featured image" className="w-full h-64 sm:h-96 object-cover" />
                         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+
                             <div className="py-8 flex justify-between items-center">
+
                                 <div>
                                     <h1 className="text-5xl font-bold mb-2">{name}</h1>
                                     <p className="text-gray-500 text-sm">Published on </p>
                                 </div>
+
                                 <div className="flex space-x-4">
+
+                                    <span>Code Access: <p className='text-lg font-bold'>{codeAccess}</p></span>
                                     <button
                                         onClick={handleEdit} // Placeholder for edit handler
                                         className="inline-flex items-center px-4 py-2 bg-[#e6fbb7] text-[#84BD00] text-sm font-medium rounded-lg hover:bg-[#d6fb83]"
@@ -101,6 +115,7 @@ export const Section = ({ community }) => {
                             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                                 <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-lg">
                                     <h2 className="text-2xl font-bold mb-4">Edit Community</h2>
+
                                     <form onSubmit={handleSubmit(onSubmit)}>
                                         <div className="mt-4">
                                             <Input
@@ -110,9 +125,7 @@ export const Section = ({ community }) => {
                                                 name={'name'}
                                                 placeholder={'Enter the new name'}
                                                 register={formRegister}
-                                                rules={{
-                                                    required: 'Name is required'
-                                                }}
+
                                                 error={errors.name}
                                             />
                                         </div>
@@ -124,9 +137,7 @@ export const Section = ({ community }) => {
                                                 name={'location'}
                                                 placeholder={'Enter the new location'}
                                                 register={formRegister}
-                                                rules={{
-                                                    required: 'Location is required'
-                                                }}
+
                                                 error={errors.location}
                                             />
                                         </div>
@@ -138,9 +149,7 @@ export const Section = ({ community }) => {
                                                 name={'description'}
                                                 placeholder={'Enter thethe new description'}
                                                 register={formRegister}
-                                                rules={{
-                                                    required: 'Description is required'
-                                                }}
+
                                                 error={errors.description}
                                             />
                                         </div>
@@ -191,6 +200,7 @@ export const Section = ({ community }) => {
                                                 Save
                                             </button>
                                         </div>
+                                        <p className='text-sm text-gray-500'>(Enter only the data you want to modify)</p>
                                     </form>
                                 </div>
                             </div>
