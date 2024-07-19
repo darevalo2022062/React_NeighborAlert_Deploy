@@ -3,6 +3,7 @@ import { userApi } from './services/userApi';
 import { postApi } from './services/postApi';
 import { communityApi } from './services/communityApi';
 import { commentApi } from './services/commentApi';
+import { requestApi } from './services/requestApi';
 
 import userReducer from './features/userSlice';
 
@@ -21,7 +22,7 @@ import storageSession from 'redux-persist/lib/storage/session';
 
 const persistConfig = {
     key: 'root',
-    storage: storageSession 
+    storage: storageSession
 };
 
 const persistedReducer = persistReducer(persistConfig, userReducer);
@@ -32,6 +33,7 @@ export const store = configureStore({
         [userApi.reducerPath]: userApi.reducer,
         [communityApi.reducerPath]: communityApi.reducer,
         [commentApi.reducerPath]: commentApi.reducer,
+        [requestApi.reducerPath]: requestApi.reducer,
         user: persistedReducer,
     },
     middleware: (getDefaultMiddleware) =>
@@ -46,7 +48,7 @@ export const store = configureStore({
                     REGISTER,
                 ],
             },
-        }).concat(userApi.middleware, postApi.middleware, communityApi.middleware, commentApi.middleware),
+        }).concat(userApi.middleware, postApi.middleware, communityApi.middleware, commentApi.middleware, requestApi.middleware),
 });
 
 export const persistor = persistStore(store);

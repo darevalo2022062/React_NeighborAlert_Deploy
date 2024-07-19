@@ -10,7 +10,7 @@ const userRoutes = [
     { path: '/login', element: <Login />, },
     { path: '/register', element: <Register /> },
     { path: '/profile', element: <PrivateRoute element={<Profile />} /> },
-    { path: '/settings',element: <PrivateRoute element={<Settings />} /> }
+    { path: '/settings', element: <PrivateRoute element={<Settings />} /> },
 ]
 
 
