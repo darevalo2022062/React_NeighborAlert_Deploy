@@ -1,5 +1,5 @@
 import React from 'react'
-import { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation, useUpdateCommunityMutation, useDeleteCommunityMutation, useUpdateCommunityImgMutation } from '../services/communityApi'
+import { useGetCommunitiesQuery, useGetCommunityByIdQuery, useCreateCommunityMutation, useUpdateCommunityMutation, useUpdateCommunityImgMutation } from '../services/communityApi'
 import { updateCredentials, clearCredentials } from '../features/userSlice';
 import { useDispatch } from 'react-redux';
 import toast from "react-hot-toast";
